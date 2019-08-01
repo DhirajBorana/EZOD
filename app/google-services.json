@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "717261613538",
+    "firebase_url": "https://ez-od-d27e5.firebaseio.com",
+    "project_id": "ez-od-d27e5",
+    "storage_bucket": "ez-od-d27e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717261613538:android:bd9ed4ecd31dfc56",
+        "android_client_info": {
+          "package_name": "com.example.ezod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717261613538-e4kglmjk2jmgrreei2kl7m4sgjcre1a0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyjNzNPwJ7Mxa89EdMogqk5yJOBeAqF64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717261613538-e4kglmjk2jmgrreei2kl7m4sgjcre1a0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
