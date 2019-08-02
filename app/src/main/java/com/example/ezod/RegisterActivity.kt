@@ -84,7 +84,7 @@ class RegisterActivity : AppCompatActivity() {
         val uid = firebaseAuth.currentUser?.uid ?: ""
         val user = User(uid, registerId, userName, isTeacher, role)
 
-        FirebaseDatabase.getInstance().getReference("users/$uid")
+        FirebaseDatabase.getInstance().getReference("users/$role/$uid")
             .setValue(user)
             .addOnSuccessListener { Log.d(_TAG, "User data Successfully added") }
             .addOnFailureListener { Log.d(_TAG, "Failed to add User data: ${it.message}") }
