@@ -16,6 +16,7 @@ class RegisterActivity : AppCompatActivity() {
     private val _TAG = "RegisterActivity"
     private val  firebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
+    private val registerIdEditText by lazy { register_id_tf.editText }
     private val nameEditText by lazy { register_name_tf.editText }
     private val emailEditText by lazy { register_email_tf.editText }
     private val passwordEditText by lazy { register_password_tf.editText }
@@ -35,14 +36,15 @@ class RegisterActivity : AppCompatActivity() {
         roles_dropdown.setAdapter(adapter)
 
         sign_up_btn.setOnClickListener {
+            val registerId =  registerIdEditText?.text.toString()
             val name = nameEditText?.text.toString()
             val email = emailEditText?.text.toString()
             val password = passwordEditText?.text.toString()
             val role = roles_dropdown.text.toString()
 
             when {
-                name.isBlank() || email.isBlank() || password.isBlank() || role.isBlank() -> showError(name, email, password, role)
-                else -> createNewUser(name, email, password, role)
+                registerId.isBlank() || name.isBlank() || email.isBlank() || password.isBlank() || role.isBlank() -> showError(registerId, name, email, password, role)
+                else -> createNewUser(registerId, name, email, password, role)
             }
         }
 
@@ -52,8 +54,9 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun showError(name: String, email: String, password: String, role: String) {
+    private fun showError(registerId: String, name: String, email: String, password: String, role: String) {
         when {
+            registerId.isEmpty() -> registerIdEditText?.error = "Required"
             name.isEmpty() -> nameEditText?.error = "Required"
             email.isEmpty() -> emailEditText?.error = "Required"
             password.isEmpty() -> passwordEditText?.error = "Required"
@@ -61,14 +64,14 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun createNewUser(name: String, email: String, password: String, role: String) {
+    private fun createNewUser(registerId: String, name: String, email: String, password: String, role: String) {
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             when {
                 task.isSuccessful -> {
                     val isTeacher = email.isTeacher()
                     when {
-                        isTeacher -> addUserToDatabase(name, isTeacher, role)
-                        else -> addUserToDatabase(name, isTeacher)
+                        isTeacher -> addUserToDatabase(registerId, name, isTeacher, role)
+                        else -> addUserToDatabase(registerId, name, isTeacher)
                     }
                     loginUserByType(isTeacher)
                 }
@@ -77,9 +80,9 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun addUserToDatabase(userName: String, isTeacher: Boolean, role: String = Role.STUDENT.value()) {
+    private fun addUserToDatabase(registerId: String, userName: String, isTeacher: Boolean, role: String = Role.STUDENT.value()) {
         val uid = firebaseAuth.currentUser?.uid ?: ""
-        val user = User(uid, userName, isTeacher, role)
+        val user = User(uid, registerId, userName, isTeacher, role)
 
         FirebaseDatabase.getInstance().getReference("users/$uid")
             .setValue(user)
