@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_student.*
+import javax.security.auth.Subject
 
 
 class StudentActivity : AppCompatActivity() {
@@ -28,14 +29,32 @@ class StudentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student)
         setOnClickListeners()
+        setLoadingData()
         getMessageData()
+    }
+
+    private fun setLoadingData() {
+        val data = mutableListOf<ODMessage>()
+        data.add(ODMessage(subject = "Loading . . . ."))
+        setUpRecyclerView(data)
     }
 
     private fun setUpRecyclerView(data: MutableList<ODMessage>) {
         student_message_rv.apply {
             layoutManager = LinearLayoutManager(this@StudentActivity)
-            adapter = StudentMessageAdapter(data, this@StudentActivity)
+            adapter = StudentMessageAdapter(data, this@StudentActivity, object : OnItemClickListener {
+                override fun onItemClicked(item: ODMessage) {
+                    Log.d("StudentActivity", item.subject)
+                    showMessage(item)
+                }
+            })
         }
+    }
+
+    private fun showMessage(message: ODMessage) {
+        val intent = Intent(this, MessageActivity::class.java)
+        intent.putExtra("OD_MESSAGE", message)
+        startActivity(intent)
     }
 
     private fun getMessageData() {

@@ -11,9 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.student.ClassHourSelectActivity"
+        <activity android:name=".ui.student.MessageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.student.StudentActivity" />
+        </activity>
+        <activity
+            android:name=".ui.student.ClassHourSelectActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.student.EmailSelectActivity"
+        <activity
+            android:name=".ui.student.EmailSelectActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.student.CreateODActivity"

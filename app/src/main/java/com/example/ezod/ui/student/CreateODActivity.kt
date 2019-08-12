@@ -15,6 +15,7 @@ import com.example.ezod.R
 import com.example.ezod.Role
 import com.example.ezod.Status
 import com.example.ezod.model.ODMessage
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -106,8 +107,12 @@ class CreateODActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().reference
         ref.child("messages/${Role.STUDENT.value()}").push()
             .setValue(newMessage)
-            .addOnSuccessListener { Log.d("CreateOD", "message added successfully") }
-            .addOnFailureListener { Log.d("CreateOD", "message added Fail") }
+            .addOnSuccessListener { Log.d("CreateOD", "message added successfully")
+                Toast.makeText(this, "Sent", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { Log.d("CreateOD", "message added Fail")
+                Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+            }
             .addOnCanceledListener { Log.d("CreateOD", "message added cancelled") }
 
         val messageForFaculty = ODMessage(
