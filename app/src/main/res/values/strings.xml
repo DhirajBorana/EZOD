@@ -8,5 +8,9 @@
     <string name="title_home">Home</string>
     <string name="title_completed">Completed</string>
     <string name="sign_out">Sign out</string>
+    <string name="for_date_of_the_message">for</string>
+    <string name="on_date_of_the_message">On</string>
+    <string name="create_od">Create OD</string>
+    <string name="send">Send</string>
 
 </resources>

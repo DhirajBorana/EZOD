@@ -1,12 +1,14 @@
-package com.example.ezod
+package com.example.ezod.ui
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import com.example.ezod.*
+import com.example.ezod.model.User
+import com.example.ezod.ui.student.StudentActivity
+import com.example.ezod.ui.teacher.TeacherActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_register.*
@@ -70,8 +72,8 @@ class RegisterActivity : AppCompatActivity() {
                 task.isSuccessful -> {
                     val isTeacher = email.isTeacher()
                     when {
-                        isTeacher -> addUserToDatabase(registerId, name, isTeacher, role)
-                        else -> addUserToDatabase(registerId, name, isTeacher)
+                        isTeacher -> addUserToDatabase(registerId, name, email, isTeacher, role)
+                        else -> addUserToDatabase(registerId, name, email, isTeacher)
                     }
                     loginUserByType(isTeacher)
                 }
@@ -80,9 +82,9 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun addUserToDatabase(registerId: String, userName: String, isTeacher: Boolean, role: String = Role.STUDENT.value()) {
+    private fun addUserToDatabase(registerId: String, userName: String, email: String, isTeacher: Boolean, role: String = Role.STUDENT.value()) {
         val uid = firebaseAuth.currentUser?.uid ?: ""
-        val user = User(uid, registerId, userName, isTeacher, role)
+        val user = User(uid, registerId, userName, email, isTeacher, role)
 
         FirebaseDatabase.getInstance().getReference("users/$role/$uid")
             .setValue(user)

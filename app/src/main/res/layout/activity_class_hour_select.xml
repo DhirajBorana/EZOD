@@ -1,108 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/constraintLayout"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    tools:context=".ui.student.ClassHourSelectActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/from_email_tf_layout"
-        android:layout_width="0dp"
+        android:id="@+id/first_hour_email_tf_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:hint="First Hour"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/from_email_tf"
+        <AutoCompleteTextView
+            android:id="@+id/first_hour_email_tf"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/grey_rectangle"
-            android:focusable="false"
-            android:hint="From"
-            android:text="testuser@gamil.com"
-            android:inputType="textEmailAddress"
-            tools:text="testuser@gamil.com" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/to_email_tf_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_next_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/from_email_tf_layout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/to_email_tf"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/grey_rectangle"
-            android:focusable="false"
-            android:hint="To"
-            android:inputType="textEmailAddress|textMultiLine"
-            tools:text="testuser@gmail.com, testuser@gmail.com, testuser@gmail.com" />
+            android:autofillHints="username"
+            android:background="@drawable/grey_rectangle" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/date_tf_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:endIconDrawable="@drawable/ic_date_24dp"
-        app:endIconMode="custom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/to_email_tf_layout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/date_tf"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/grey_rectangle"
-            android:focusable="false"
-            android:hint="Date"
-            android:inputType="date"
-            tools:text="02/08/2019" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/file_tf_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_tf_layout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/image_file_tf"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/grey_rectangle"
-            android:focusable="false"
-            android:hint="Attach File"
-            android:inputType="textNoSuggestions" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/subject_tf_layout"
+        android:id="@+id/second_hour_email_tf_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -110,20 +39,21 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file_tf_layout">
+        app:layout_constraintTop_toBottomOf="@+id/first_hour_email_tf_layout">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/subject_tf"
+        <AutoCompleteTextView
+            android:id="@+id/second_hour_email_tf"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:autofillHints="username"
             android:background="@drawable/grey_rectangle"
-            android:hint="Subject"
-            android:inputType="textCapSentences|textMultiLine" />
+            android:hint="Second Hour" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/content_tf_layout"
+        android:id="@+id/third_hour_email_tf_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -131,58 +61,125 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subject_tf_layout">
+        app:layout_constraintTop_toBottomOf="@+id/second_hour_email_tf_layout">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/content_tf"
+        <AutoCompleteTextView
+            android:id="@+id/third_hour_email_tf"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:autofillHints="username"
             android:background="@drawable/grey_rectangle"
-            android:hint="Content"
-            android:inputType="textCapSentences|textMultiLine" />
+            android:hint="Third Hour"
+            tools:text="testuser@gmail.com" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/class_hour_tf_layout"
+        android:id="@+id/fourth_hour_email_tf_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:endIconCheckable="true"
-        app:endIconDrawable="@drawable/ic_next_24dp"
-        app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content_tf_layout">
+        app:layout_constraintTop_toBottomOf="@+id/third_hour_email_tf_layout">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/class_hour_tf"
+        <AutoCompleteTextView
+            android:id="@+id/fourth_hour_email_tf"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:autofillHints="username"
             android:background="@drawable/grey_rectangle"
-            android:focusable="false"
-            android:hint="Class Hour"
-            android:inputType="textEmailAddress|textMultiLine" />
+            android:hint="Fourth Hour"
+            tools:text="testuser@gmail.com" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fifth_hour_email_tf_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fourth_hour_email_tf_layout">
+
+        <AutoCompleteTextView
+            android:id="@+id/fifth_hour_email_tf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="username"
+            android:background="@drawable/grey_rectangle"
+            android:hint="Fifth Hour"
+            tools:text="testuser@gmail.com" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/sixth_hour_email_tf_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fifth_hour_email_tf_layout">
+
+        <AutoCompleteTextView
+            android:id="@+id/sixth_hour_email_tf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="username"
+            android:background="@drawable/grey_rectangle"
+            android:hint="Sixth Hour"
+            tools:text="testuser@gmail.com" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/seventh_hour_email_tf_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sixth_hour_email_tf_layout">
+
+        <AutoCompleteTextView
+            android:id="@+id/seventh_hour_email_tf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="username"
+            android:background="@drawable/grey_rectangle"
+            android:hint="Seventh Hour"
+            tools:text="testuser@gmail.com" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/send_od_fab"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+        android:id="@+id/class_hour_check_fab"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:text="@string/send"
-        app:icon="@drawable/ic_send_24dp"
+        android:backgroundTint="@color/colorAccent"
         app:iconTint="@android:color/white"
+        app:icon="@drawable/ic_check_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

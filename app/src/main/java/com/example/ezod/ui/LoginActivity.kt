@@ -1,9 +1,11 @@
-package com.example.ezod
+package com.example.ezod.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import com.example.ezod.R
+import com.example.ezod.ui.student.StudentActivity
+import com.example.ezod.ui.teacher.TeacherActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -24,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
             val password = passwordEditText?.text.toString()
 
             when {
-                email.isNotBlank() || password.isNotBlank() -> loginUser(email, password)
-                else -> showError()
+                email.isBlank() || password.isBlank() -> showError()
+                else -> loginUser(email, password)
             }
         }
 

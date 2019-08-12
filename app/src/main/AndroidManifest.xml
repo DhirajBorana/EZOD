@@ -11,27 +11,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CreateODActivity"
+        <activity android:name=".ui.student.ClassHourSelectActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.student.EmailSelectActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.student.CreateODActivity"
             android:label="@string/title_activity_create_od">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".StudentActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.student.StudentActivity" />
         </activity>
         <activity
-            android:name=".TeacherActivity"
+            android:name=".ui.teacher.TeacherActivity"
             android:label="@string/title_activity_teacher" />
         <activity
-            android:name=".StudentActivity"
+            android:name=".ui.student.StudentActivity"
             android:label="@string/title_activity_student" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

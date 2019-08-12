@@ -1,17 +1,15 @@
-package com.example.ezod
+package com.example.ezod.ui.teacher
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
+import com.example.ezod.R
+import com.example.ezod.ui.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_student.*
-import kotlinx.android.synthetic.main.activity_teacher.*
-import kotlinx.android.synthetic.main.fragment_message.*
 
 class TeacherActivity : AppCompatActivity() {
 
