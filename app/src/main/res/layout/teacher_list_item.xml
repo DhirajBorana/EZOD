@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/user_message_subject_tv"
+        android:id="@+id/user_name_tv"
         style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,20 +17,18 @@
         tools:text="User Name" />
 
     <TextView
-        android:id="@+id/for_tv"
-        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:id="@+id/user_register_id_tv"
+        style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_message_subject_tv"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_tv"
         tools:text="RA170002000000" />
 
     <TextView
-        android:id="@+id/user_time_tv"
+        android:id="@+id/user_date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -40,13 +38,37 @@
         tools:text="2/8/2019" />
 
     <TextView
-        android:id="@+id/user_message_status_tv"
+        android:id="@+id/user_status_tv"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="Pending" />
+
+    <TextView
+        android:id="@+id/user_subject_tv"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_register_id_tv" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#EFEFEF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_subject_tv" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

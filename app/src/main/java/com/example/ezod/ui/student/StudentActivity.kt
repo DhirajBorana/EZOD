@@ -3,23 +3,21 @@ package com.example.ezod.ui.student
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.ezod.R
 import com.example.ezod.Role
 import com.example.ezod.model.ODMessage
 import com.example.ezod.ui.LoginActivity
+import com.example.ezod.ui.MessageActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_student.*
-import javax.security.auth.Subject
 
 
 class StudentActivity : AppCompatActivity() {
@@ -34,9 +32,9 @@ class StudentActivity : AppCompatActivity() {
     }
 
     private fun setLoadingData() {
-        val data = mutableListOf<ODMessage>()
-        data.add(ODMessage(subject = "Loading . . . ."))
-        setUpRecyclerView(data)
+        val loadingData = mutableListOf<ODMessage>()
+        loadingData.add(ODMessage(subject = "Loading . . . ."))
+        setUpRecyclerView(loadingData)
     }
 
     private fun setUpRecyclerView(data: MutableList<ODMessage>) {
@@ -45,13 +43,13 @@ class StudentActivity : AppCompatActivity() {
             adapter = StudentMessageAdapter(data, this@StudentActivity, object : OnItemClickListener {
                 override fun onItemClicked(item: ODMessage) {
                     Log.d("StudentActivity", item.subject)
-                    showMessage(item)
+                    showODMessage(item)
                 }
             })
         }
     }
 
-    private fun showMessage(message: ODMessage) {
+    private fun showODMessage(message: ODMessage) {
         val intent = Intent(this, MessageActivity::class.java)
         intent.putExtra("OD_MESSAGE", message)
         startActivity(intent)

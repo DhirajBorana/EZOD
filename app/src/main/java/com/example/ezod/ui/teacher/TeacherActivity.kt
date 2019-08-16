@@ -6,16 +6,20 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.TextView
 import com.example.ezod.R
+import com.example.ezod.model.ODMessage
 import com.example.ezod.ui.LoginActivity
+import com.example.ezod.ui.MessageActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class TeacherActivity : AppCompatActivity() {
 
-    private lateinit var textMessage: TextView
-    private val fragmentMessageHome = MessageFragment()
-    private val fragmentMessageComplete = BlankFragment()
+    private var userRole = ""
+    private var userEmail = ""
+
+    private val fragmentMessageHome = HomeFragment()
+    private val fragmentMessageComplete = CompletedFragment()
+    private val fragmentMessageAttendance = AttendanceFragment()
     private val fragmentManager = supportFragmentManager
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -30,6 +34,11 @@ class TeacherActivity : AppCompatActivity() {
                     .replace(R.id.fragment_container, fragmentMessageComplete).commit()
                 return@OnNavigationItemSelectedListener true
             }
+            R.id.navigation_attendance -> {
+                fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragmentMessageAttendance).commit()
+                return@OnNavigationItemSelectedListener true
+            }
         }
         false
     }
@@ -38,8 +47,33 @@ class TeacherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher)
 
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
+
+    fun showODMessage(message: ODMessage) {
+        val intent = Intent(this, MessageActivity::class.java)
+        intent.putExtra("OD_MESSAGE", message)
+        intent.putExtra("USER_ROLE", userRole)
+        intent.putExtra("USER_EMAIL", userEmail)
+        startActivity(intent)
+    }
+
+    fun showAttendanceMessage(message: ODMessage) {
+        val intent = Intent(this, AttendanceActivity::class.java)
+        intent.putExtra("ATTENDANCE_MESSAGE", message)
+        intent.putExtra("USER_EMAIL", userEmail)
+        startActivity(intent)
+    }
+
+    fun setUserRoleAndEmail(role: String, email: String) {
+        userRole = role
+        userEmail = email
+    }
+
+    fun setActionBarTitle(title: String) {
+        supportActionBar?.title = title
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

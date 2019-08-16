@@ -11,7 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.student.MessageActivity">
+        <activity android:name=".ui.teacher.AttendanceActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.teacher.TeacherActivity" />
+        </activity>
+        <activity
+            android:name=".ImageViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.MessageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.student.StudentActivity" />

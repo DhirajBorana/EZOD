@@ -2,12 +2,14 @@ package com.example.ezod.ui.student
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.DatePicker
 import android.widget.Toast
@@ -15,9 +17,13 @@ import com.example.ezod.R
 import com.example.ezod.Role
 import com.example.ezod.Status
 import com.example.ezod.model.ODMessage
+import com.example.ezod.model.User
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_create_od.*
 import java.io.IOException
@@ -43,12 +49,8 @@ class CreateODActivity : AppCompatActivity() {
         updateDateUi()
     }
 
-    private fun updateDateUi() {
-        val format = "dd/MM/yyyy"
-        val dateFormat = SimpleDateFormat(format, Locale.US)
-
-        date_tf.setText(dateFormat.format(calendar.time))
-    }
+    private var userEmail = ""
+    private lateinit var userObject: User
 
     private var sendToEmailData = arrayListOf<String>()
     private var classHourEmailData = arrayListOf<String>()
@@ -59,12 +61,35 @@ class CreateODActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_od)
 
         updateFromEmailUi()
+        getUserObject()
         setOnClickListeners()
     }
 
+    private fun getUserObject() {
+        Log.d("CreateODActivity", "HELLO")
+        val ref = FirebaseDatabase.getInstance().reference
+        ref.child("users/${Role.STUDENT.value()}")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (data in p0.children) {
+                        val user = data.getValue(User::class.java) ?: User()
+                        if (user.email == userEmail) { userObject = user }
+                    }
+                }
+                override fun onCancelled(p0: DatabaseError) { Log.d("CreateODActivity", "User Object Cancelled") }
+            })
+    }
+
+    private fun updateDateUi() {
+        val format = "dd/MM/yyyy"
+        val dateFormat = SimpleDateFormat(format, Locale.US)
+        date_tf.setText(dateFormat.format(calendar.time))
+    }
+
     private fun updateFromEmailUi() {
-        val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email ?: "Null"
-        from_email_tf.setText(currentUserEmail)
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        userEmail = currentUser?.email ?: ""
+        from_email_tf.setText(userEmail)
     }
 
     private fun setOnClickListeners() {
@@ -92,20 +117,23 @@ class CreateODActivity : AppCompatActivity() {
     }
 
     private fun addODMessageToDatabase() {
+        val messageUid = UUID.randomUUID().toString()
         val currentTime = System.currentTimeMillis()
         val fromEmail = from_email_tf.text.toString()
         val sendToEmail = sendToEmailData
         val date = date_tf.text.toString()
+        val imageFileName = getImageFileName(imageFilePathData)
         val imageFileUid = UUID.randomUUID().toString()
         val subject = subject_tf.text.toString()
         val content = content_tf.text.toString()
         val sendToEmailAfterAccepted = classHourEmailData
         val status = Status.PENDING.toString()
+        val user = userObject
 
-        val newMessage = ODMessage(currentTime, fromEmail, sendToEmail, date, imageFileUid, subject, content, sendToEmailAfterAccepted, status)
+        val newMessage = ODMessage(messageUid, currentTime, fromEmail, sendToEmail, date, imageFileName, imageFileUid, subject, content, sendToEmailAfterAccepted, status, user)
 
         val ref = FirebaseDatabase.getInstance().reference
-        ref.child("messages/${Role.STUDENT.value()}").push()
+        ref.child("messages/${Role.STUDENT.value()}").child(messageUid)
             .setValue(newMessage)
             .addOnSuccessListener { Log.d("CreateOD", "message added successfully")
                 Toast.makeText(this, "Sent", Toast.LENGTH_SHORT).show()
@@ -115,29 +143,19 @@ class CreateODActivity : AppCompatActivity() {
             }
             .addOnCanceledListener { Log.d("CreateOD", "message added cancelled") }
 
-        val messageForFaculty = ODMessage(
-            createdOn = currentTime,
-            fromEmail = fromEmail,
-            date = date,
-            imageFileUid = imageFileUid,
-            subject = subject,
-            content = content,
-            sendToEmailAfterAccepted = sendToEmailAfterAccepted,
-            status = Status.PENDING.toString()
-        )
         for (i in 0 until sendToEmail.size) {
             when (i) {
-                0 -> { sendODMessageToFaculty(messageForFaculty, Role.HEAD_OF_DEPARTMENT.value()) }
-                1 -> { sendODMessageToFaculty(messageForFaculty, Role.EVENT_COORDINATOR.value()) }
-                2 -> { sendODMessageToFaculty(messageForFaculty, Role.FACULTY_ADVISER.value()) }
+                0 -> { sendODMessageToFaculty(messageUid, newMessage, Role.HEAD_OF_DEPARTMENT.value()) }
+                1 -> { sendODMessageToFaculty(messageUid, newMessage, Role.EVENT_COORDINATOR.value()) }
+                2 -> { sendODMessageToFaculty(messageUid, newMessage, Role.FACULTY_ADVISER.value()) }
             }
         }
         addImageFileToFirebaseStorage(imageFilePathData, imageFileUid)
     }
 
-    private fun sendODMessageToFaculty(message: ODMessage, role: String) {
+    private fun sendODMessageToFaculty(messageUid: String, message: ODMessage, role: String) {
         val ref = FirebaseDatabase.getInstance().reference
-        ref.child("messages/$role").push()
+        ref.child("messages/$role").child(messageUid)
             .setValue(message)
             .addOnSuccessListener { Log.d("CreateOD", "message sent successfully") }
             .addOnFailureListener { Log.d("CreateOD", "message sent Fail") }
@@ -190,8 +208,21 @@ class CreateODActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateImageFileUi(filePath: Uri) {
-        image_file_tf.setText(filePath.toString())
+    private fun updateImageFileUi(imageFilePathData: Uri) {
+        val fileName = getImageFileName(imageFilePathData)
+        image_file_tf.setText(fileName)
+    }
+
+    private fun getImageFileName(filePath: Uri): String {
+        var fileName = ""
+        filePath.let { returnUri ->
+            contentResolver.query(returnUri, null, null, null, null)
+        }?.use {  cursor ->
+            val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            cursor.moveToFirst()
+            fileName = cursor.getString(nameIndex)
+        }
+        return fileName
     }
 
     private fun updateSentToUi(sendToEmailData: ArrayList<String>) {

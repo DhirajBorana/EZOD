@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/grey_rectangle">
+
+    <TextView
+        android:id="@+id/message_class_hour_1_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:text="Class Hour 1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/message_class_hour_1_email_tv"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/message_class_hour_1_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="testuser1@gmail.com" />
+
+    <TextView
+        android:id="@+id/message_class_hour_2_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Class Hour 2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_1_tv" />
+
+    <TextView
+        android:id="@+id/message_class_hour_2_email_tv"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/message_class_hour_2_tv"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_1_email_tv"
+        tools:text="testuser1@gmail.com" />
+
+    <TextView
+        android:id="@+id/message_class_hour_3_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:text="Class Hour 3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_2_tv" />
+
+    <TextView
+        android:id="@+id/message_class_hour_3_email_tv"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/message_class_hour_3_tv"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_2_email_tv"
+        tools:text="testuser1@gmail.com" />
+
+    <TextView
+        android:id="@+id/message_class_hour_4_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:text="Class Hour 4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_3_tv" />
+
+    <TextView
+        android:id="@+id/message_class_hour_4_email_tv"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/message_class_hour_4_tv"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_3_email_tv"
+        tools:text="testuser1@gmail.com" />
+
+    <TextView
+        android:id="@+id/message_class_hour_5_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Class Hour 5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_4_tv" />
+
+    <TextView
+        android:id="@+id/message_class_hour_5_email_tv"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/message_class_hour_5_tv"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_4_email_tv"
+        tools:text="testuser1@gmail.com" />
+
+    <TextView
+        android:id="@+id/message_class_hour_6_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:text="Class Hour 6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_5_tv" />
+
+    <TextView
+        android:id="@+id/message_class_hour_6_email_tv"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/message_class_hour_6_tv"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_5_email_tv"
+        tools:text="testuser1@gmail.com" />
+
+    <TextView
+        android:id="@+id/message_class_hour_7_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        android:text="Class Hour 7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_6_tv" />
+
+    <TextView
+        android:id="@+id/message_class_hour_7_email_tv"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@+id/message_class_hour_7_tv"
+        app:layout_constraintTop_toBottomOf="@+id/message_class_hour_6_email_tv"
+        tools:text="testuser1@gmail.com" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
